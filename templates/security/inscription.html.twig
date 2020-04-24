@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+    <center><h1>Inscription !</h1></center>
+    
+    {{ form_start(form) }}
+    <div class="container">
+        {{ form_row(form.email,{'label': 'Email','attr':{'placeholder':'Entrez email...','class':'form-control'}}) }}
+        {{ form_row(form.pseudo,{'label': 'Pseudo','attr':{'placeholder':'Entrez pseudo...','class':'form-control'}}) }}
+        {{ form_row(form.password,{'label': 'Mot de passe','attr':{'placeholder':'Entrez votre Mot de passe...','class':'form-control'}}) }}    
+        <button type="submit" class="btn btn-secondary float-right"> S'inscrire !</button>
+    </div>
+    {{ form_end(form) }}  
+      
+{% endblock %}
