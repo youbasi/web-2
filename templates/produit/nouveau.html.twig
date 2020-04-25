@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+<center><h1>Créer un produit!</h1></center>
+    {{ form_start(form) }}
+    <div class="container">
+        {{ form_row(form.name,{'label': 'Nom','attr':{'placeholder':'Entrez le nom du produit...','class':'form-control'}}) }}
+        {{ form_row(form.reference,{'label': 'Réference','attr':{'placeholder':'Entrez une réference...','class':'form-control'}}) }}
+        {{ form_row(form.prix,{'label': 'Prix','attr':{'placeholder':'Entrez le prix...','class':'form-control'}}) }}
+        {{ form_row(form.image,{'label': 'Image','attr':{'class':'form-control'}}) }}
+        {{ form_row(form.descriptif,{'label': 'Descriptif','attr':{'placeholder':'Entrez la description...','class':'form-control'}}) }}
+    </br>        <button type="submit" class="btn btn-secondary float-right"> Confirmer !</button>
+    </div>
+    {{ form_end(form) }}  
+{% endblock %}

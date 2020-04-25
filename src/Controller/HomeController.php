@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/home", name="home")
+     * @Route("/", name="home")
      */
     public function index()
     {
@@ -16,4 +16,34 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
+    /**
+     * @Route("/anchors",name="anchors")
+     */
+    public function anchors()
+    {
+        return $this->render('home/anchors.html.twig');
+    }
+
+    /**
+     * @Route("/help",name="help")
+     */
+    public function help()
+    {
+        return $this->render('home/help.html.twig');
+    }
+    
+    /**
+     * @Route("/packJetons",name="packJetons")
+     */
+    public function packJetons()
+    {
+        return $this->render('home/PackJetons.html.twig');
+    }
+    /**
+     * @Route("/historique", name="historique")
+     */
+
+     public function historique(){
+         return $this->render('home/Historique.html.twig');
+     }
 }

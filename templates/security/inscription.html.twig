@@ -8,8 +8,9 @@
     <div class="container">
         {{ form_row(form.email,{'label': 'Email','attr':{'placeholder':'Entrez email...','class':'form-control'}}) }}
         {{ form_row(form.pseudo,{'label': 'Pseudo','attr':{'placeholder':'Entrez pseudo...','class':'form-control'}}) }}
-        {{ form_row(form.password,{'label': 'Mot de passe','attr':{'placeholder':'Entrez votre Mot de passe...','class':'form-control'}}) }}    
-        <button type="submit" class="btn btn-secondary float-right"> S'inscrire !</button>
+        {{ form_row(form.password.first,{'label': 'Mot de passe','attr':{'placeholder':'Mot de passe...','class':'form-control'}}) }}
+        {{ form_row(form.password.second,{'label': 'confirmation du Mot de passe','attr':{'placeholder':'confirmez votre Mot de passe...','class':'form-control'}}) }}
+    </br>        <button type="submit" class="btn btn-secondary float-right"> S'inscrire !</button>
     </div>
     {{ form_end(form) }}  
       
