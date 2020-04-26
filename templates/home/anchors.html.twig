@@ -40,22 +40,43 @@
     </tr>
     </thead>
     {% for anchor in anchors %}
-        <tbody>
-    <tr>
-      <th scope="row">{{anchor.id}}</th>
-      <td><table>
-        <tr><th><img src="{{anchor.image}}" width= "75" height="75"></th></tr>
-        <tr><th><p5>{{ anchor.reference }}</p5></th></tr>
+            <tbody>
+        <tr>
+        <th scope="row">{{anchor.id}}</th>
+        <td><table>
+            <tr><th><img src="{{anchor.image}}" width= "75" height="75"></th></tr>
+            <tr><th><p5>{{ anchor.reference }}</p5></th></tr>
+            </table></td>
+        <td><table>
+            <tr><th>{{ anchor.descriptif }}</th></tr>
+            {% for produit in produits %}
+            <tr><th> {{ produit.dateDebut }}<th></tr>
         </table></td>
-      <td><table>
-        <tr><th>{{ anchor.descriptif }}</th></tr>
-        <tr><th><p4> date de debut<p1><th></tr>
-      </table></td>
-      <td>{{ anchor.prix }} €</td>
-      <td> date de fin </td>
-      <td><input label="prix"><button type="submit" class="btn btn-secondary">enchérir</button></td>
-    </tr>
-    </tbody>
+        <td>{{ anchor.prix }} €</td>
+        <td><table>
+            <tr><span class="title5 countdown ">countdown</span></tr>
+            <tr>{{ produit.dateFin }}</tr>
+        </table></td>
+            {% endfor %}
+                {% if app.user %}
+                    <td><table>
+                        <tr><td><input class="form-control" id="inputDefault" placeholder="Placez votre enchére" 
+                        label="prix" style="width:150px"></td>
+                            <td><button type="submit" class="btn btn-secondary">enchérir</button></td>
+                        </tr>
+                        </table>
+                        <table>
+                        <tr><td><input class="form-control" id="inputDefault" placeholder="de" style="width:70px"></td>
+                            <td><input class="form-control" id="inputDefault" placeholder="à"  style="width:70px"></td>
+                            <td><button type="submit" class="btn btn-secondary">enchérir</button></td>
+                        </tr>
+                    </table>
+                    </td>
+                {% else %}
+                    <td><a type="submit" class="btn btn-secondary" href="/inscription">inscrivez vous pour enchérir</a></td>
+                </tr>
+                </tbody>
+                {% endif %}
     {% endfor %}
 
 </table>    

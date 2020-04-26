@@ -11,6 +11,12 @@
         {{ form_row(form.prix,{'label': 'Prix','attr':{'placeholder':'Entrez le prix...','class':'form-control'}}) }}
         {{ form_row(form.image,{'label': 'Image','attr':{'class':'form-control'}}) }}
         {{ form_row(form.descriptif,{'label': 'Descriptif','attr':{'placeholder':'Entrez la description...','class':'form-control'}}) }}
+        <div class="row">
+        <div class= "col md-6">
+        {{ form_row(formDate.dateDebut,{'label': 'Date de Début','class':'form-control'}) }}
+        {{ form_row(formDate.dateFin,{'label': 'Date de fin','class':'form-control'}) }}
+        </div>
+        </div>
     </br>        <button type="submit" class="btn btn-secondary float-right"> Confirmer !</button>
     </div>
     {{ form_end(form) }}  

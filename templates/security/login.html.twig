@@ -15,15 +15,38 @@
             You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
     {% endif %}
-
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" required>
-    <input type="hidden" name="_csrf_token"value="{{ csrf_token('authenticate') }}">
-
-    {#
+    <center>     
+       </br>
+       </br>
+       </br>
+    <div class="jumbotron" style="width:320px">
+            <h3 class="display-5" class="h3 font-weight-normal">Please sign in</h3>
+            </br>
+            <p class="lead" >
+            <div class= "row mb-3">
+            <div class="col-3">
+                <label for="inputEmail">Email</label>
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus style="width:250px">
+            </div>
+            </div>
+            <div class="row mb-3">
+            <div class="col-3">   
+                <label for="inputPassword">Password</label>
+                <input type="password" name="password" id="inputPassword" class="form-control" required style="width:250px">
+                <input type="hidden" name="_csrf_token"value="{{ csrf_token('authenticate') }}">
+            </div>
+            </div>
+            </p>
+            <br/>
+            <p class="lead">
+                <button class="btn btn-lg btn-secondary" type="submit">
+                    Sign in
+                </button>
+            </p>
+        </center>
+    </div>
+</form>
+     {#
         Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
         See https://symfony.com/doc/current/security/remember_me.html
 
@@ -33,9 +56,4 @@
             </label>
         </div>
     #}
-    </br>
-    <button class="btn btn-lg btn-secondary" type="submit">
-        Sign in
-    </button>
-</form>
 {% endblock %}

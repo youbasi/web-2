@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Enchere;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * @method Enchere|null find($id, $lockMode = null, $lockVersion = null)
@@ -35,7 +36,16 @@ class EnchereRepository extends ServiceEntityRepository
         ;
     }
     */
-
+    public function findAllTime(): array
+    {
+        return $this->findAllQuery()
+                    ->getQuery()
+                    ->getResult();
+    }
+    private function findAllQuery():QueryBuilder
+    {
+        return $this->createQueryBuilder('e');
+    }
     /*
     public function findOneBySomeField($value): ?Enchere
     {

@@ -50,11 +50,6 @@ class Produit
      * @var string|null
      */
     private $name;
-    /**
-     * @ORM\Column(type="datetime")
-     * @var \DateTime
-     */
-    private $update_at;
 
     public function getId(): ?int
     {
@@ -115,10 +110,6 @@ class Produit
     public function setImageFile($imageFile)
     {
         $this->imageFile = $imageFile;
-       /* if ($imageFile) {
-            $this->updated_at = new \DateTime('now');
-        }*/
-
 
         return $this;
     }
@@ -131,22 +122,6 @@ class Produit
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updated_at;
-    }
-
-    /**
-     * @param \DateTimeInterface $updated_at
-     * 
-     * @return self
-     */
-    public function setUpdatedAt(\DateTimeInterface $updated_at): self
-    {
-        $this->updated_at = $updated_at;
 
         return $this;
     }
