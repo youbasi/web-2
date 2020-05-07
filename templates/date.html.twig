@@ -1,8 +1,11 @@
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block title %} Entrer la date {% endblock %}
 {{form_start(form)}}
-<div class="row">
+<div class="container">
     <div class= "col md-6">
         {{ form_row(form.dateDebut,{'label': 'Date de Début','class':'form-control'}) }}
         {{ form_row(form.dateFin,{'label': 'Date de fin','class':'form-control'}) }}
     </div>
+    <button class="btn btn-primary" type="submit">Ajouter</button>
 </div>
 {{form_end(form)}}

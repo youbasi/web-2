@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+{% block title %}{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+    <div class="container">
+        {{ form_row(form.dateDebut,{'label':'Date de début'}) }}
+        {{ form_row(form.dateFin,{'label':'Date de fin'}) }}
+        </br>
+        <button type="submit" class="btn btn-secondary float-right"> Confirmer !</button>
+    </div>
+    {{ form_end(form) }} 
+{% endblock %}

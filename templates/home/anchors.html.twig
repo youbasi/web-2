@@ -30,54 +30,118 @@
 
 <table class="table table-hover">
     <thead>
-    <tr class="table-active">
-      <th scope="col">num</th>
-      <th scope="col">image</th>
-      <th scope="col" width="250">Déscription</th>
-      <th scope="col">Prix </th>
-      <th scope="col">Date de Fin </th>
-      <th scope="col">placer une enchére </th>
-    </tr>
+        <tr class="table-active">
+        <th scope="col">num</th>
+        <th scope="col">image</th>
+        <th scope="col" width="250">Déscription</th>
+        <th scope="col">Prix </th>
+        <th scope="col">Date de Fin </th>
+        <th scope="col">placer une enchére </th>
+        </tr>
     </thead>
-    {% for anchor in anchors %}
-            <tbody>
+    <tbody>
+    {% for anchor in anchors %}   
         <tr>
-        <th scope="row">{{anchor.id}}</th>
-        <td><table>
-            <tr><th><img src="{{anchor.image}}" width= "75" height="75"></th></tr>
-            <tr><th><p5>{{ anchor.reference }}</p5></th></tr>
-            </table></td>
-        <td><table>
-            <tr><th>{{ anchor.descriptif }}</th></tr>
-            {% for produit in produits %}
-            <tr><th> {{ produit.dateDebut }}<th></tr>
-        </table></td>
-        <td>{{ anchor.prix }} €</td>
-        <td><table>
-            <tr><span class="title5 countdown ">countdown</span></tr>
-            <tr>{{ produit.dateFin }}</tr>
-        </table></td>
-            {% endfor %}
+            <th scope="row">{{anchor.id}}</th>
+                <td><table>
+                    <tr>
+                        <th><img src="/images/produits/{{anchor.image}}" style="width:8rem; height: 8rem;" /></th>
+                    </tr>
+                    <tr>
+                        <th><p5>{{ anchor.reference }}</p5></th>
+                    </tr>
+                </table></td>
+                <td><table>
+                    <tr>
+                        <th>{{ anchor.descriptif }}</th>
+                    </tr>
+                    <tr>
+                        
+                        <th> 
+                            
+                                {{ anchor.connect.datedebut | date('d / m / Y , H : m') }}
+                            
+                        <th>
+                        
+                    </tr>
+                    
+                </table></td>
+                <td>{{ anchor.prix }} €</td>
+                <td><table>
+                   <tr>
+                        <th>
+                        
+                            {{ anchor.connect.dateFin | date('d / m / Y , H : m') }}
+                           <p id="demo"></p>
+                       
+                        </th>
+                    </tr>   
+                </table></td>
+                    
                 {% if app.user %}
-                    <td><table>
-                        <tr><td><input class="form-control" id="inputDefault" placeholder="Placez votre enchére" 
-                        label="prix" style="width:150px"></td>
-                            <td><button type="submit" class="btn btn-secondary">enchérir</button></td>
-                        </tr>
-                        </table>
-                        <table>
-                        <tr><td><input class="form-control" id="inputDefault" placeholder="de" style="width:70px"></td>
-                            <td><input class="form-control" id="inputDefault" placeholder="à"  style="width:70px"></td>
-                            <td><button type="submit" class="btn btn-secondary">enchérir</button></td>
-                        </tr>
-                    </table>
-                    </td>
+                <td><table>
+                    <tr>
+                        <td><input class="form-control" id="inputEncheres" placeholder="Placez votre enchére" label="prix" style="width:150px"></td>
+                            
+                        <td><button type="submit" onclick="readInput();"class="btn btn-secondary">enchérir</button>
+                        </td>
+                    </tr></table>
+                    <table>
+                    <tr>
+                        <td><input class="form-control" id="inputDefault" placeholder="de" style="width:70px"></td>
+                        <td><input class="form-control" id="inputDefault" placeholder="à"  style="width:70px"></td>
+                        <td><button type="submit" class="btn btn-secondary">enchérir</button></td>
+                    </tr>
+                </table></td>
                 {% else %}
                     <td><a type="submit" class="btn btn-secondary" href="/inscription">inscrivez vous pour enchérir</a></td>
-                </tr>
-                </tbody>
                 {% endif %}
+        </tr>            
     {% endfor %}
-
+    </tbody>
 </table>    
 {% endblock %}
+{# En se basant sur base.html.twig, la place du block javascript est en bas du block body #}
+{% block javascripts %}
+    <script type="text/javascript">
+    console.log("Salut");   //test function 
+            // Set the date we're counting down to
+            var countDownDate = new Date("Juin 5, 2020 15:37:25").getTime();
+
+            // Update the count down every 1 second
+            var x = setInterval(function() {
+
+            // Get today's date and time
+            var now = new Date().getTime();
+
+            // Find the distance between now and the count down date
+            var distance = countDownDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the result in the element with id="demo"
+            document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+            + minutes + "m " + seconds + "s ";
+
+            // If the count down is finished, write some text
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("demo").innerHTML = "EXPIRED";
+            }
+            }, 1000);
+
+
+        function readInput(){
+            var encheres = new Array();
+            var saisie= document.getElementById('inputEncheres').value;
+            var inputs= encheres.push(saisie); // stocker toutes les inputs dans encheres (fait)
+        }
+                                    
+                                
+
+            </script>
+            {% endblock %}

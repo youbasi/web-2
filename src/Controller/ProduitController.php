@@ -21,54 +21,48 @@ class ProduitController extends AbstractController
     /**
      * @Route("/nouveau", name="nouveau")
      */
-    public function nouveau(Request $request, EntityManagerInterface $manager, FileUploader $fileUploader): Response
+   public function nouveau(Request $request, EntityManagerInterface $manager, FileUploader $fileUploader): Response
     {
         $produit = new Produit();
-        $date = new Enchere();
-        $formDate = $this->createForm(AnchorsType::class, $date);
         $formProduit = $this->createForm(ProduitType::class, $produit);
-        //$form = $formDate && $formProduit;
-        $formDate->handleRequest($request);
         $formProduit->handleRequest($request);
-        //$form = $formDate && $formProduit;
-        if($formDate->isSubmitted() && $formDate->isValid()){
-            $manager->persist($date);
-            $manager->flush();
-        }
-        if($formProduit->isSubmitted() && $formProduit->isValid())
-        {
-            $file = $formProduit['image']->getData();
-                    $filename = (new \DateTime())->format('Y-m-d-H-i-s') . $file->getClientOriginalName();
+        if($formProduit->isSubmitted() && $formProduit -> isValid() ){    
+       $file = $produit->getImageFile();
 
-                    $directory = '../public/images/produits';
-
-                    $file->move($directory, $filename);
-        /*$file = $produit->getImageFile();
         $filename = $fileUploader->upload($file);
-        $produit->setImage($filename);*/
-        $manager->persist($produit);
+        $produit->setImage($filename);
+        $manager->persist($produit);        
         $manager->flush();
-        return $this->redirectToRoute("anchors");
-        }
         
-        return $this->render('produit/nouveau.html.twig', [
-            'produit' => '$produit',
-            'form' => $formProduit->createView(),
-            'formDate' => $formDate->createView()
-        ]);
+        return $this->redirectToRoute("anchors");
+        
     }
+    return $this->render('produit/nouveau.html.twig', [
+        'produit' => '$produit',
+        'form' => $formProduit->createView(),
     
-    /*public function date(Request $request, EntityManagerInterface $manager): Response
+    ]);
+}
+    /**
+     * @Route("/NvEncheres", name = "nvencheres")
+     */
+    public function enchere(Request $request, EntityManagerInterface $manager):Response
     {
-        $date = new Enchere();
-        $form = $this->createForm(AnchorsType::class, $date);
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
-            $manager->persist($date);
+        $enchere = new Enchere();
+        $formDate = $this->createForm(AnchorsType::class, $enchere);
+        $formDate->handleRequest($request);
+        if($formDate->isSubmitted() && $formDate->isValid()){
+            $enchere->setNumero(uniqid());
+            $manager->persist($enchere);
             $manager->flush();
+            /*après avoir indiqué la date, j'ai mis redirection vers la création du produit
+            pour que l'utilisateur continue le processus
+            */
+            return $this->redirectToRoute("nouveau");
         }
-        return $this->render('date.html.twig',[
-            'form' => $form->createView()
+        return $this->render('produit/nouvelleEnchere.html.twig',[
+            'enchere'=>'$enchere',
+            'form'=>$formDate->createView(),
         ]);
     }
     /**
@@ -76,9 +70,9 @@ class ProduitController extends AbstractController
      */
     public function affichage(ProduitRepository $produitRepository, EnchereRepository $enchereRepository)
     {
-        //$anchors = $produitRepository->findAll() + $enchereRepository->findAllTime();
+        
         $anchors = $produitRepository->findAll();
-         $produits = $enchereRepository->findAllTime();
+        $produits = $enchereRepository->findAll();
         return $this->render('home/anchors.html.twig', [
             'controller_name' => 'ProduitController',
             'anchors' => $anchors,

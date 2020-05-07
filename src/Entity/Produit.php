@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -50,6 +52,14 @@ class Produit
      * @var string|null
      */
     private $name;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Enchere", inversedBy="produits")
+     * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank()
+     */
+    private $connect;
+
 
     public function getId(): ?int
     {
@@ -124,5 +134,27 @@ class Produit
         $this->name = $name;
 
         return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $created_at): self
+    {
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getConnect(): ?Enchere
+    {
+        return $this->connect;
+    }
+
+    public function setConnect(?Enchere $enchere): void
+    {
+        $this->connect = $enchere;
     }
 }
